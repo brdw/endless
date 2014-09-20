@@ -1,4 +1,4 @@
-Flask==0.10.1
+Flask>=0.10.1
 simplejson>=3.6.0
 cassandra-driver>=2.1.1
 cqlsh>=4.1.1

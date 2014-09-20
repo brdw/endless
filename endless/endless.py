@@ -17,6 +17,9 @@ from .tools import memoize
 default_dumps = json.dumps
 default_loads = json.loads
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 ROOT = '||ROOT||'  # pipe is important for byte sort
 
@@ -145,6 +148,8 @@ class Client(object):
     def delete(self, key, async=False):
         collection_id, item_id = create_keys(key)
 
+        logger.debug('Executing delete: %s', _delete_template)
+
         # print 'Executing', stmt
         if async:
             future = self.session.execute_async(_delete_template, (collection_id, item_id))
@@ -169,6 +174,8 @@ class Client(object):
 
         stmt = _batch_template % '\n'.join(batch)
 
+        logger.debug('Executing put: %s', stmt)
+
         # print 'Executing', stmt
         if async:
             future = self.session.execute_async(stmt, args)
@@ -181,6 +188,8 @@ class Client(object):
 
         stmt, args = build_scan_stmt(parent_key)
 
+        logger.debug('Executing scan: %s', stmt)
+
         # print 'Executing', stmt
         cur = self.session.execute(stmt, args)
 
@@ -192,6 +201,8 @@ class Client(object):
 
         stmt, args = build_scan_stmt(parent_key)
 
+        logger.debug('Executing scan async: %s', stmt)
+
         # print 'Executing', stmt
         future = self.session.execute_async(stmt, args)
 
@@ -200,6 +211,8 @@ class Client(object):
     def deep_scan(self, parent_key, loads=default_loads, gt=None, gte=None, lt=None, lte=None, limit=None, keys_per_item=250):
 
         stmt, args = build_deep_scan_stmt(parent_key, gt, gte, lt, lte, limit, keys_per_item)
+
+        logger.debug('Executing deep scan: %s', stmt)
         cur = self.session.execute(stmt, args)
 
         for r in construct(cur, limit, loads):
@@ -208,6 +221,8 @@ class Client(object):
     def deep_scan_async(self, parent_key, loads=default_loads, gt=None, gte=None, lt=None, lte=None, limit=None, keys_per_item=250):
 
         stmt, args = build_deep_scan_stmt(parent_key, gt, gte, lt, lte, limit, keys_per_item)
+
+        logger.debug('Executing deep scan async: %s', stmt)
         future = self.session.execute_async(stmt, args)
 
         return AsyncDeepScanFormatter(future, limit, loads)

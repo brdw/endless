@@ -89,6 +89,8 @@ def get_table_key(collection, key, sub_key=None):
 
     full_key = '/'.join(parts)
 
+    logger.debug('Full Key: %s', full_key)
+
     with app.app_context():
         client = get_endless_client()
 
@@ -112,7 +114,7 @@ def get_table_key(collection, key, sub_key=None):
                         query_args[arg] = params[arg]
                         page_args[arg] = params[arg]
 
-                print 'Deep Scan', full_key, query_args
+                logger.debug('Deep Scan: %s %s', full_key, query_args)
 
                 future = client.deep_scan_async(full_key, **query_args)
 
