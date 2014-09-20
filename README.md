@@ -37,16 +37,19 @@ Let's create two users in a users collection with curl. The url becomes a key fo
 
 ## Creating Objects and making Root collections
 $ curl -X POST http://localhost:5000/users/brad/ -H "Content-type: application/json" -d '{"name":"brad", "title":"engineer"}'
+
 $ curl -X POST http://localhost:5000/users/adrian/ -H "Content-type: application/json" -d '{"name":"adrian", "title":"mobileengineer"}'
 
 If your data is echoed back to you, it's stored and immediately accessible via those same urls in your browser. Since these are 'top level' collections they are special and play a special part in the sharding scheme in the data store. We call these 'Root Collections' and they are not iterable. However once an object is in a 'Root Collection' it can have sub collections that are iterable. So let's setup some friends.
 
 $ curl -X POST http://localhost:5000/users/brad/friends/adrian -H "Content-type: application/json" -d '{"name":"adrian"}'
+
 $ curl -X POST http://localhost:5000/users/brad/friends/sarah -H "Content-type: application/json" -d '{"name":"sarah"}'
 
 Now these urls are special because they are Sub Collections. Going to those urls without trailing slashes indicates to Endless these are Objects just like before. However because they have a common url component /friends/ we can now iterate on this special friends Collection via http://localhost:5000/users/brad/friends/ and we will see that both Adrian and Sarah are returned. These Sub Collections are iterable and support iteration and key slicing. Let's add a few more and do some iteration and slicing.
 
 $ curl -X POST http://localhost:5000/users/brad/friends/dave -H "Content-type: application/json" -d '{"name":"dave"}'
+
 $ curl -X POST http://localhost:5000/users/brad/friends/rachael -H "Content-type: application/json" -d '{"name":"rachael"}'
 
 ## Page Size
