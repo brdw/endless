@@ -1,3 +1,5 @@
+__author__ = 'bwillard'
+
 from cassandra.cluster import Cluster
 try:
     import ujson as json
@@ -9,25 +11,12 @@ import pytz
 from decimal import Decimal
 from datetime import datetime, date
 
+from .tools import memoize
+
 
 default_dumps = json.dumps
 default_loads = json.loads
 
-
-_create_keyspace = '''
-    CREATE KEYSPACE endless
-    WITH replication = {'class':'SimpleStrategy', 'replication_factor': 2};
-'''
-
-_create_store = '''
-    create table datastore (
-        collection_id text,
-        item_id text,
-        key text,
-        value text,
-        primary key (collection_id, item_id, key)
-    ) WITH COMPACT STORAGE;
-'''
 
 ROOT = '||ROOT||'  # pipe is important for byte sort
 

@@ -1,6 +1,8 @@
-Flask>=0.10.1
-simplejson
+Flask==0.10.1
+simplejson>=3.6.0
 cassandra-driver>=2.1.1
+cqlsh>=4.1.1
+Fabric>=1.10.0
 
 # python-snappy
 # ujson
