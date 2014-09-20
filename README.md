@@ -64,4 +64,6 @@ Sub collections supporting slicing via params: gt, gte, lt, and lte (greater tha
 http://localhost:5000/users/brad/friends/?gt=adrian
 You are welcome to include combinations in the url. If you choose your keys well, you can do all sorts of interesting quick lookup hacks with slices.
 
+It's important to note when doing slices that the comparison operators are in the text/ascii sense, not numeric sense. All urls resolve to string keys in the datastore.
+
  
