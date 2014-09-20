@@ -1,0 +1,6 @@
+Flask>=0.10.1
+simplejson
+cassandra-driver>=2.1.1
+
+# python-snappy
+# ujson
