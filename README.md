@@ -1,7 +1,7 @@
 Endless
 =======
 
-Endless is a generic and dynamic REST backend for NoSQL databases with the goal of reducing the need for server side code through convention. Most JS code typically interests against an api server providing data via some REST incarnate. The Endless project was born out of the realization that these url concepts map naturally so NoSQL key/val stores and Endless exploits this. With a few simple conventions you can dynamically create your backend from your JS code in a scalable way.
+Endless is a generic and dynamic REST backend for NoSQL databases with the goal of reducing the need for server side code through convention. Most JS code typically interacts against an api server providing data via some REST incarnate. The Endless project was born out of the realization that these url concepts map naturally so NoSQL key/val stores. With a few simple conventions you can dynamically create your backend from your JS code in a scalable way.
 
 Currently Endless isn't suitable for production as it provides no data security, however Endless makes for an excellent hacking and prototyping platform when your data is tighly coupled to your app and installed in a secure location. We hope to change this in coming versions.
 
@@ -41,7 +41,7 @@ $ curl -X POST http://localhost:5000/users/brad/ -H "Content-type: application/j
 
 $ curl -X POST http://localhost:5000/users/adrian/ -H "Content-type: application/json" -d '{"name":"adrian", "title":"mobileengineer"}'
 
-If your data is echoed back to you, it's stored and immediately accessible via those same urls in your browser. Since these are 'top level' collections they are special and play a special part in the sharding scheme in the data store. We call these 'Root Collections' and they are not iterable. However once an object is in a 'Root Collection' it can have sub collections that are iterable. So let's setup some friends.
+If your data is echoed back to you, it's stored and immediately accessible via those same urls in your browser. Since these are 'top level' collections they are special and play a special part in the sharding scheme in the data store. We call these Root Collections because they play a part in intial sharding and consequently they are not iterable. However once an object is in a 'Root Collection' it can have Sub Collections that are iterable. So let's setup some friends.
 
 ## Creating Sub Collections and Objects
 
@@ -49,7 +49,7 @@ $ curl -X POST http://localhost:5000/users/brad/friends/adrian -H "Content-type:
 
 $ curl -X POST http://localhost:5000/users/brad/friends/sarah -H "Content-type: application/json" -d '{"name":"sarah"}'
 
-Now these urls are special because they are Sub Collections. Going to those urls without trailing slashes indicates to Endless these are Objects just like before. However because they have a common url component /friends/ we can now iterate on this special friends Sub Collection via http://localhost:5000/users/brad/friends/ providing a trailing slash to indicate it's a Sub Collection. These Sub Collections are iterable and support paging and key slicing. Let's add a few more and do some iteration and slicing.
+Now these urls are special because they are Sub Collections. Going to those urls without trailing slashes indicates to Endless these are Objects just like before. However because they have a common url component brad/friends/ we can now iterate on this special friends Sub Collection via http://localhost:5000/users/brad/friends/ providing a trailing slash to indicate it's a Sub Collection in Endless. These Sub Collections are iterable and support paging and key slicing. Let's add a few more and do some iteration and slicing.
 
 $ curl -X POST http://localhost:5000/users/brad/friends/dave -H "Content-type: application/json" -d '{"name":"dave"}'
 
