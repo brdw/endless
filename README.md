@@ -12,22 +12,21 @@ Currently we are only supporting Cassandra 2.* and officially working with 2.0.9
 
 To configure cassandra for Endless we have provide a fabfile that creates the keyspace and table where all data is stored.
 
-$ fab hosts:localhost install
+> fab hosts:localhost install
 
 Installation of Endless itself is a simple command provided you don't have trouble compiling c libs
 
-$ python setup.py install
+> python setup.py install
 
 Assuming everything is running on localhost we have provided a simple example of configuring and starting the server in examples/simple_server.py
 
-$ cd examples
-$ python simple_server.py 
+> cd examples
+> python simple_server.py 
 INFO:werkzeug: * Running on http://127.0.0.1:5000/
 
 Pointing your browser to http://localhost:5000/ should then show you the welcome json to let you know everything is working
 
 # Adding data
 
-Endless exploits the REST concepts of collections and objects. Let's create a new user and put them in the /users collections. We do this via POST, passing a json header, and then the json data as a string
-
-$ 
+Endless exploits the REST concepts of collections and objects. Let's create a new user and put them in the /users collections. We do this via POST, passing a json header, and then the json data as a string.
+ 
