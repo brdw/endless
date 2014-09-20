@@ -49,7 +49,7 @@ $ curl -X POST http://localhost:5000/users/brad/friends/adrian -H "Content-type:
 
 $ curl -X POST http://localhost:5000/users/brad/friends/sarah -H "Content-type: application/json" -d '{"name":"sarah"}'
 
-Now these urls are special because they are Sub Collections. Going to those urls without trailing slashes indicates to Endless these are Objects just like before. However because they have a common url component /friends/ we can now iterate on this special friends Sub Collection via http://localhost:5000/users/brad/friends/ providing a trailing slash to indicate it's iterable. These Sub Collections are iterable and support paging and key slicing. Let's add a few more and do some iteration and slicing.
+Now these urls are special because they are Sub Collections. Going to those urls without trailing slashes indicates to Endless these are Objects just like before. However because they have a common url component /friends/ we can now iterate on this special friends Sub Collection via http://localhost:5000/users/brad/friends/ providing a trailing slash to indicate it's a Sub Collection. These Sub Collections are iterable and support paging and key slicing. Let's add a few more and do some iteration and slicing.
 
 $ curl -X POST http://localhost:5000/users/brad/friends/dave -H "Content-type: application/json" -d '{"name":"dave"}'
 
